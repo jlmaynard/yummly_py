@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+
+{% extends "header.html" %}
+{% block title %}My amazing blog{% endblock %}
+{% block content %}
+    <head>
+
+    <title>Pyum About</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href='{% static "app/css/templatemo_style.css" %}'>
+    <style type="text/css">
+
+    </style>
+</head>
+
+<body>
+<div id ="templatemo_main" style="background-color: #771201;">
+    <div class = "content_wrapper">
+        <div id ="input_form" style="width: 600px; padding: 35px">
+            <div>
+                <h2 style="text-align: left">About Pyum </h2>
+                <p>
+                    Pyum (Pie-Yum) is all about finding you a healthy meal to eat. We're a nutritional
+                recipe aggregator. After filling some information about your health and activity level, we
+                attempt to find you something to eat that will help you achieve your goal weight. Our recipe search is
+                powered by Yummly. After specifying what ingredients you would or would not like to have, 25 recipes
+                are returned back, each linking to nutritional information and steps to prepare that meal.
+                </p>
+                <br/>
+                <h2 style="text-align: left">Calorie Calculations</h2>
+                <p>
+                    The two calculations we use are the following:
+                </p>
+                <p>
+                    Female = 655 + (4.35 * weight) + (4.7 * height) - (4.7 * age)
+                </p>
+                <p>
+                    Male = 66 + (6.23 * weight) + (12.7 * height) - (6.8 * age)
+                </p>
+                <p>
+                    We then use your activity level and your weekly goal to calculate how many calories you require each day. When you search for a meal and
+                    say how many calories you have already consumed, we take that number and subtract it from your determined
+                    total. We then divide by how many meals that you specify you have left in the day, and we use that final number
+                    to search for recipes.
+                </p>
+                <br/>
+                <h2 style="text-align: left">Type II Diabetic</h2>
+                <p>
+                    If you specified that you are a type II diabetic, we add in a few nutritional requirements for any meal given to you.
+                    Carbs are now limited in a range between 45 - 65 grams, and sodium is now limited to a maximum of 0.4 grams.
+                </p>
+                <br/>
+                <h2 style="text-align: left">Legal Stuff</h2>
+                <p>
+                    This website uses the Yummly API which generously is free to 500 calls per day and they reserve the right to all recipes
+                    returned. Also note that any nutritional guidelines are merely that, guidelines. Dietary information and guidance should
+                    be between you and your doctor or dietitian.
+                </p>
+                <h2 style="text-align: left">Contact Us</h2>
+                <p>
+                    Any Questions, issues, or suggestions? email: erik33045@gmail.com
+                </p>
+                <h3 style="text-align: left">The Team</h3>
+                <p>
+                    Erik Hendrickson - System Architect
+                </p>
+                <p>
+                    Vi Tran - Lead UI Designer
+                </p>
+                <p>
+                    Jason Maynard - Sales and Marketing, Dietary / Health Research
+                </p>
+                <p>
+                    Mark Brophy - Developer / Yummly API Research
+                </p>
+                <p>
+                    James Robe - Developer, Documentation
+                </p>
+                <p>
+                    Greg Alway - Developer / Dietary Research
+                </p>
+            </div>
+        <div>
+
+        <div class="clear"></div>
+    </div>
+</div>
+
+</body>
+</html>
+{% endblock %}

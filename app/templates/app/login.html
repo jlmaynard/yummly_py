@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+{% extends "header.html" %}
+{% block title %}My amazing blog{% endblock %}
+{% block content %}
+    <head>
+    <title>Pyum</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href='{% static "app/css/templatemo_style.css" %}'>
+</head>
+
+<body>
+<div id="templatemo_main">
+    <div class="content_wrapper">
+        <div id = input_form style="width: 500px">
+        <h1 style="">Login to Pyum</h1>
+        <form id="login_form" method="post" action="/app/login/" style="margin-left: 4px; height: 130px">
+            {% csrf_token %}
+            <div style="width: 480px">
+                <div style="text-align: right">
+                <label> Username:
+                    <input type="text" name="username" value="" size="50"/>
+                </label>
+                <br/>
+                <label> Password:
+                    <input type="password" name="password" value="" size="50"/>
+                </label>
+                <br/>
+                </div>
+            </div>
+
+            <div style="float: left">
+                <div style="float: left">
+                <input type="submit" value="submit"/>
+                </div>
+                <div style="padding-left: 6px; float: left">
+                    Not a member? <a href="/pyum/register">Click here to register.</a><br/>
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+</body>
+{% endblock %}
+</html>

@@ -1,0 +1,21 @@
+#slider-range{
+    background: #771201;
+}
+
+.ui-slider-handle{
+}
+
+.ui-slider{
+    width: 50%;
+    table-layout: auto;
+    margin: auto auto auto 0;
+    background: #771201;
+    align: left;
+}
+
+.content_wrapper{
+    background-color: #771201;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}

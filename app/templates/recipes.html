@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+
+{% extends "header.html" %}
+{% block title %}My amazing blog{% endblock %}
+{% block content %}
+{% load render_table from django_tables2 %}
+
+<head>
+    <title>Recipe Results</title>
+    <link rel="stylesheet" href="{{ STATIC_URL }}app/css/screen.css"/>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static "app/css/templatemo_style.css" %}">
+    <link rel="stylesheet" href='{% static "app/css/smoothness/jquery-ui-1.10.4.custom.min.css" %}'>
+    <link rel="stylesheet" href='{% static "app/css/pyum.css" %}'>
+</head>
+
+<body>
+<div id="templatemo_main" style="background-color: #771201; min-height: 330px">
+    <div class="content_wrapper" style="background-color: #771201; min-width: 750px; border: none">
+        <div style="margin-top: 10px">
+        <div id="div_search" class="content_wrapper" style="background-color: #FFFFFF; width: 25%; min-width: 215px; float: left; border: 1px solid black; padding: 5px 10px 10px 10px">
+            <input id="hide_search" type="button" value="Hide" onclick="changeSearchFormVisibility();" />
+            <form id="form_search" action="/pyum/search_recipes/" method="POST"  enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="id_ignore_user_preference">Ignore User Preferences:</label>
+                {{ search_form.ignore_user_preferences }}
+
+                <div id="divUserPreferences">
+                    <label for="id_calories_consumed">Calories Consumed:</label>
+                    {{ search_form.calories_consumed }}
+                    <label for="id_current_weight">Current Weight (pounds):</label>
+                    {{ search_form.current_weight}}
+                    <label for="id_num_meals">Meals Left in the Day:</label>
+                    {{ search_form.num_meals }}
+                </div>
+
+                <label for="id_in_ingredients">Included Ingredients:</label>
+                {{ search_form.in_ingredients }}
+
+                <label for="id_ex_ingredients">Excluded Ingredients:</label>
+                {{ search_form.ex_ingredients }}
+
+                <label for="id_prep_time">Preparation Time (in minutes):</label>
+                {{ search_form.prep_time }}
+
+                <div id="divSliders" style="text-align: left">
+                    <div class="slider">
+                        <p>
+                            <label for="amount-sweetness">Sweetness:</label>
+                            <input type="text" id="amount-sweetness" name="amount-sweetness" class="amount"
+                                   style="border:0; color:#771201; font-weight:bold;">
+                        </p>
+
+                        <div id="range-sweetness" class="slider-range"></div>
+                    </div>
+                    <div class="slider">
+                        <p>
+                            <label for="amount-meatiness">Meatiness:</label>
+                            <input type="text" id="amount-meatiness" name="amount-meatiness" class="amount"
+                                   style="border:0; color:#771201; font-weight:bold;">
+                        </p>
+                        <div id="range-meatiness" class="slider-range"></div>
+                    </div>
+                    <div class="slider">
+                        <p>
+                            <label for="amount-sourness">Sourness:</label>
+                            <input type="text" id="amount-sourness" name="amount-sourness" class="amount"
+                                   style="border:0; color:#771201; font-weight:bold;">
+                        </p>
+                        <div id="range-sourness" class="slider-range"></div>
+                    </div>
+                    <div class="slider">
+                        <p>
+                            <label for="amount-sweetness">Bitterness:</label>
+                            <input type="text" id="amount-bitterness" name="amount-bitterness" class="amount"
+                                   style="border:0; color:#771201; font-weight:bold;">
+                        </p>
+
+                        <div id="range-bitterness" class="slider-range"></div>
+                    </div>
+                    <div class="slider">
+                        <p>
+                            <label for="amount-spicyness">Spicyness:</label>
+                            <input type="text" id="amount-spicyness" name="amount-spicyness" class="amount"
+                                   style="border:0; color:#771201; font-weight:bold;">
+                        </p>
+
+                        <div id="range-spicyness" class="slider-range"></div>
+                    </div>
+                </div>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <div style="width: 68%; float: left">
+            <div id="table" style="float: left; min-width: 582px; width: 100%; background-color: #FFFFFF;">
+            {% render_table table %}
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src='{% static "app/js/jquery-1.3.2.min.js" %}'></script>
+<script type='text/javascript' src='{% static "app/js/jquery-ui.min.js" %}'></script>
+<script type='text/javascript' src='{% static "app/js/jquery.ui.core.min.js" %}'></script>
+<script type='text/javascript' src='{% static "app/js/jquery.ui.widget.min.js" %}'></script>
+<script type='text/javascript' src='{% static "app/js/jquery.ui.mouse.min.js" %}'></script>
+<script type='text/javascript' src='{% static "app/js/jquery.ui.slider.min.js" %}'></script>
+<script type='text/javascript' src='{% static "app/js/jquery.validate.js" %}' ></script>
+<script type="text/javascript">
+    $("#form_search").validate({
+        rules: {
+            current_weight: {
+                number: true,
+                required: true
+            },
+            calories_consumed: {
+                number: true,
+                required: true
+            },
+            prep_time: {
+                number: true
+            },
+            in_ingredients:{
+                required: true
+            }
+        }
+    });
+
+    function changeSearchFormVisibility(){
+        var button = $("#hide_search");
+        var div_search = $('#div_search');
+        if(button.val() == "Hide"){
+            $("#form_search").hide();
+            button.val("Show");
+            div_search.css('min-width', "55px");
+            div_search.css('width', "55px");
+        }
+        else{
+            $("#form_search").show();
+            button.val("Hide");
+            div_search.css('min-width', "215px");
+            div_search.css('width', "25%");
+        }
+
+    }
+
+    $("#id_ignore_user_preferences").change(function() {
+        var div = $("#divUserPreferences");
+        $("#id_current_weight").val("");
+        $("#id_calories_consumed").val("");
+        if($("#id_ignore_user_preferences").is(':checked')){
+            div.hide();
+        }else{
+            div.show();
+        }
+
+
+    });
+
+    $(".slider").each(function() {
+        var $this = $(this);
+        $( ".slider-range", $this).slider({
+            range: true,
+            min: 0,
+            max: 10,
+            step: 1,
+            values: [ 0, 10 ],
+            slide: function( event, ui ) {
+                $( ".amount", $this ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+            }
+        });
+        $( ".amount", $this).val($( ".slider-range", $this ).slider( "values", 0 ) +
+                " - " + $( ".slider-range", $this ).slider( "values", 1 ) );
+    });
+
+</script>
+
+</body>
+</html>
+{% endblock %}
