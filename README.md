@@ -1,7 +1,9 @@
 pyum
 ====
 
-Python project using Django which utilizes the Yummly API
+Python project using Django which utilizes the Yummly API. 
+
+// Main credit and reference to the language below belongs to Erik Hendrickson.  He was the main developer on the project but all team members added content.  My role was around the research and analysis of the diabetes portion. 
 
 See the final presentation PDF file for an overview. 
 
